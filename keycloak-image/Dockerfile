@@ -1,12 +1,17 @@
-# Utilisation de l'image de base JBoss Keycloak
+# Using Keycloak 22.0.4
 FROM quay.io/keycloak/keycloak:22.0.4
 
-## Définition des variables d'environnement pour l'utilisateur et le mot de passe de l'administrateur Keycloak
+# Define environment variables for Keycloak admin user
 ENV KEYCLOAK_ADMIN=admin
 ENV KEYCLOAK_ADMIN_PASSWORD=admin
 
-# Exposer le port sur lequel Keycloak écoute (8080 par défaut)
-#EXPOSE 8080
+# Define environment variables for Keycloak database
+ENV DB_VENDOR=POSTGRES
+ENV DB_ADDR=db
+ENV DB_DATABASE=keycloak
+ENV DB_USER=keycloak
+ENV DB_PASSWORD=password
 
 # TODO enlever le dev
-CMD ["start-dev"]
+# Start Keycloak in development mode, using custom database (PostgreSQL)
+CMD ["start-dev", "--db", "postgres", "--db-username", "keycloak", "--db-password", "password", "--db-url-host", "keycloak-db"]

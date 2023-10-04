@@ -1,7 +1,7 @@
-# Utilisation de l'image de base PostgreSQL
+# Using PostgreSQL image (latest)
 FROM postgres:latest
 
-# Variables d'environnement pour la base de données PostgreSQL
+# Environment variables for PostgreSQL database
 ENV POSTGRES_DB=keycloak
 ENV POSTGRES_USER=keycloak
 ENV POSTGRES_PASSWORD=password
