@@ -5,7 +5,7 @@ KEYCLOAK_DIR="keycloak-image"
 POSTGRES_DIR="postgres-image"
 
 # Docker image names
-KEYCLOAK_IMAGE="keycloak-srv"
+KEYCLOAK_IMAGE="keycloak-server"
 POSTGRES_IMAGE="keycloak-db"
 
 # Build the Keycloak image
