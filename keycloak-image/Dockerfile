@@ -14,4 +14,4 @@ ENV DB_PASSWORD=password
 
 # TODO enlever le dev
 # Start Keycloak in development mode, using custom database (PostgreSQL)
-CMD ["start-dev", "--db", "postgres", "--db-username", "keycloak", "--db-password", "password", "--db-url-host", "keycloak-db"]
+CMD ["start-dev", "--db", "postgres", "--db-username", "keycloak", "--db-password", "password", "--db-url-host", "keycloak-db", "--health-enabled", "true"]
