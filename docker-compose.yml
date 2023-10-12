@@ -1,22 +1,36 @@
 version: '3'
-
+# Docker Compose file for Keycloak testing
 services:
   keycloak:
-    image: keycloak-srv
-    hostname: keycloak-srv
+    image: keycloak-server
+    hostname: keycloak-server
     ports:
-      - "9090:8080"
+      - ${KEYCLOAK_PORT}
     build: .
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_DB_URL_HOST: ${KC_DB_URL_HOST}
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD}
+      KC_DB: ${KC_DB}
+      KC_DB_USERNAME: ${KC_DB_USERNAME}
+      KC_HEALTH_ENABLED: ${KC_HEALTH_ENABLED}
     depends_on:
       - db
     networks:
-        - keycloak-network
+      - keycloak-network
 
   db:
     image: keycloak-db
     hostname: keycloak-db
+    ports:
+      - ${POSTGRES_PORT}
     volumes:
       - keycloak-db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     networks:
       - keycloak-network
 
