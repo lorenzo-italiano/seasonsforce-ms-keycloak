@@ -2,7 +2,7 @@
 
 ## Description
 
-This file is a *tutorial* on how to set up keycloak in a microservices architecture. It is not a tutorial in the traditional sense, but rather a collection of notes on how to set up keycloak in a microservices architecture. It is meant to be used as a reference for future developers who need to set up keycloak in a microservices architecture.
+This file is a *tutorial* on how to set up keycloak in a microservices' architecture. It is not a tutorial in the traditional sense, but rather a collection of notes on how to set up keycloak in a microservices' architecture. It is meant to be used as a reference for future developers who need to set up keycloak in a microservices' architecture.
 
 ## Keycloak container
 
@@ -33,7 +33,7 @@ Here is the example of the docker-compose.yml file:
 
 ```yaml
 version: '3'
-# Docker Compose file for Keycloak testing
+
 services:
   keycloak:
     image: keycloak-server
@@ -195,21 +195,22 @@ You can then use the `access_token` to authenticate users on the microservices.
 ### Add dependencies to the `pom.xml` file
 
 ```xml
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-</dependency>
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-security</artifactId>
-</dependency>
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+</dependencies>
 ```
 
 These dependencies are from Spring Security. They are used to authenticate users on the microservices through another provider (Keycloak in this case).
 
 ### Setting up the `application.properties` file
 
-```properties
 
 In the `application.properties` file, you need to add the following properties:
 
@@ -297,8 +298,9 @@ public class JwtAuthConverter implements Converter<Jwt, AbstractAuthenticationTo
         this.jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
     }
 
-    private final String principleAttribute = "preferred_username"; // TODO: Env variable
-    private final String resourceId = "seasonsforce-client"; // TODO: Env variable
+    // You can put these values in the `.env` file
+    private final String principleAttribute = "preferred_username";
+    private final String resourceId = "<client_name>"; 
 
     @Override
     public AbstractAuthenticationToken convert(@NonNull Jwt jwt) {
@@ -350,8 +352,8 @@ You can now use the `@PreAuthorize` annotation to secure endpoints. Here is an e
 ```java
 package springboot.keycloak.myapp.controller;
 
-import fr.polytech.model.MyModel;
-import fr.polytech.service.MyService;
+import springboot.keycloak.myapp.model.MyModel;
+import springboot.keycloak.myapp.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.http.HttpStatus;
