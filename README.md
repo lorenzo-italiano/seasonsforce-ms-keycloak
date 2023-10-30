@@ -420,6 +420,74 @@ You should get `test for authenticated users`.
 
 If your user has the role `<admin_role_name>`, you can access the endpoint `/test/admin` and `/test`, but not `/test/user` (you will get a `403 Forbidden` error).
 
+## Exemple of a request to sign up a user
+
+First you need to create a user (eg: username : `user-manager`) that has two roles from `realm-management` client:
+- `manage-users`
+- `create-client`
+
+Then you can use the following request to get an admin token:
+
+```bash
+curl --location --request POST 'http://localhost:8080/realms/seasonsforce/protocol/openid-connect/token' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'grant_type=password' \
+--data-urlencode 'client_id=admin-cli' \
+--data-urlencode 'username=user-manager' \
+--data-urlencode 'password=<password>'
+```
+
+This request will give you an admin `access_token`, signed with a user that has the role `manage-users` and `create-client`.
+
+Then you can use this token to create a new user:
+
+```bash
+curl --location --request POST 'http://localhost:8000/admin/realms/seasonsforce/users' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <access_token>' \
+--data-raw '{
+    "username": "new username",
+    "firstName": "firstName",
+    "lastName": "lastName",
+    "email": "email@example.com",
+    "attributes": {
+        "phoneNumber": "00XXXXXXXX",
+        "company": "company",
+        "age": 55,
+        <other attributes>
+    },
+    "enabled": true,
+    "emailVerified": false,
+    "credentials": [
+        {
+          "type": "password",
+          "value": "<password>",
+          "temporary": false
+        }
+    ],
+    "groups": ["myGroup"],
+    "realmRoles": ["myRole"],
+    "clientRoles": {
+        "myClient": ["myRole"]
+    }
+}' 
+```
+
+This request will create a new user with the following attributes:
+- username : `new username`
+- firstName : `firstName`
+- lastName : `lastName`
+- email : `email@example.com`
+- phoneNumber : `00XXXXXXXX`
+- company : `company`
+- age : `55`
+- password : `<password>`
+- enabled : `true`
+- emailVerified : `false`
+- groups : `myGroup`
+- realmRoles : `myRole`
+- clientRoles : `myRole` for the client `myClient`
+
 ---
 
 *© 2023 Romain Frezier & Lorenzo Italiano - Polytech Montpellier*

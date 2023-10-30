@@ -1,2 +1,3 @@
 .idea
 .env
+keycloak-image/*.json
