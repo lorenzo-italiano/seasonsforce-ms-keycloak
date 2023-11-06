@@ -7,7 +7,6 @@ COPY realm-import.json /opt/keycloak/data/import/realm-import.json
 # Admin console custom theme
 RUN mkdir -p /opt/keycloak/themes/customTheme/admin/resources
 COPY assets/logo.svg /opt/keycloak/themes/customTheme/admin/resources/logo.svg
-COPY assets/favicon.ico /opt/keycloak/themes/customTheme/admin/resources/favicon.ico
 COPY assets/theme.properties /opt/keycloak/themes/customTheme/admin/theme.properties
 
 # TODO enlever le dev
