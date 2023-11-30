@@ -1,5 +1,12 @@
 # How to set up Keycloak in a microservices architecture (using Spring Boot as API framework)
 
+<a target="_blank" href="https://github.com/lorenzo-italiano/Seasonsforce">
+  <img alt="github link" src="https://img.shields.io/badge/SEASONFORCE-global-green?logo=github&style=for-the-badge">
+</a>
+<a target="_blank" href="https://github.com/lorenzo-italiano/seasonsforce-microservices">
+  <img alt="github link" src="https://img.shields.io/badge/SEASONFORCE-microservices-blue?logo=github&style=for-the-badge">
+</a>
+
 ## Description
 
 This file is a *tutorial* on how to set up keycloak in a microservices' architecture. It is not a tutorial in the traditional sense, but rather a collection of notes on how to set up keycloak in a microservices' architecture. It is meant to be used as a reference for future developers who need to set up keycloak in a microservices' architecture.
@@ -490,4 +497,4 @@ This request will create a new user with the following attributes:
 
 ---
 
-*© 2023 Romain Frezier & Lorenzo Italiano - Polytech Montpellier*
+© Romain Frezier & Lorenzo Italiano - IG5 Polytech Montpellier - 2023
